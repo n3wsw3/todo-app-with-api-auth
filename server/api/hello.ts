@@ -1,6 +1,16 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import { useRouter } from "../utils/routeDelegator";
+import { useBody } from "h3";
 
-export default (req: IncomingMessage, res: ServerResponse) => {
-  res.statusCode = 200;
-  res.end("Hello Api!");
-};
+const router = useRouter();
+
+router.get(async (req, res) => {
+  return "Hello Api!";
+});
+
+router.post(async (req, res) => {
+  const body = await useBody(req);
+
+  return body;
+});
+
+export default router.routes();
