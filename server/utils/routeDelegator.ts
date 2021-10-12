@@ -14,6 +14,8 @@ enum RequestMethods {
   PATCH = "PATCH",
 }
 
+type route = (delegate: Delegate) => RouteDelegator;
+
 class RouteDelegator {
   delegateMap = new Map<RequestMethods, Delegate>();
 
@@ -35,30 +37,30 @@ class RouteDelegator {
     };
   }
 
-  post(delegate: Delegate): RouteDelegator {
+  post: route = (delegate) => {
     this.addDelegate(RequestMethods.POST, delegate);
     return this;
-  }
+  };
 
-  get(delegate: Delegate): RouteDelegator {
+  get: route = (delegate) => {
     this.addDelegate(RequestMethods.GET, delegate);
     return this;
-  }
+  };
 
-  put(delegate: Delegate): RouteDelegator {
+  put: route = (delegate) => {
     this.addDelegate(RequestMethods.PUT, delegate);
     return this;
-  }
+  };
 
-  delete(delegate: Delegate): RouteDelegator {
+  delete: route = (delegate) => {
     this.addDelegate(RequestMethods.DELETE, delegate);
     return this;
-  }
+  };
 
-  patch(delegate: Delegate): RouteDelegator {
+  patch: route = (delegate) => {
     this.addDelegate(RequestMethods.PATCH, delegate);
     return this;
-  }
+  };
 }
 
 export const useRouter = () => {
