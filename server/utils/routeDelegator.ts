@@ -1,7 +1,18 @@
 import { IncomingMessage as IM, ServerResponse as SR } from "http";
-import { RequestMethods } from "./methods";
 
 type Delegate = (req: IM, res: SR) => void | Object;
+
+enum RequestMethods {
+  GET = "GET",
+  HEAD = "HEAD",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+  CONNECT = "CONNECT",
+  OPTIONS = "OPTIONS",
+  TRACE = "TRACE",
+  PATCH = "PATCH",
+}
 
 class RouteDelegator {
   delegateMap = new Map<RequestMethods, Delegate>();
