@@ -13,10 +13,10 @@ import {
   sendMessageResponse,
 } from "../utils/response";
 import {
-  createAuthenticationTokens,
-  userFromToken,
+  createAuthenticationTokens
 } from "../services/token.service";
 import mongoose from "mongoose";
+import { IM } from "../../server";
 
 export const register = async (req: IncomingMessage, res: ServerResponse) => {
   await new User(await useBody(req))
@@ -67,11 +67,7 @@ export const logout = async (req: IncomingMessage, res: ServerResponse) => {
   sendErrorResponse(res, "No such api token", StatusCodes.NOT_FOUND);
 };
 
-export const testToken = async (req: IncomingMessage, res: ServerResponse) => {
-  const { token } = await useBody(req);
-
-  const user = await userFromToken(token);
-
-  if (user) return sendMessageResponse(res, "Success", StatusCodes.ACCEPTED);
+export const testToken = async (req: IM, res: ServerResponse) => {
+  if (req.user) return sendMessageResponse(res, "Success", StatusCodes.ACCEPTED);
   sendErrorResponse(res, "Token Not Valid", StatusCodes.BAD_REQUEST);
 };
