@@ -1,4 +1,5 @@
 import { IncomingMessage as IM, ServerResponse as SR } from "http";
+import { sendErrorResponse } from "./response";
 
 type Delegate = (req: IM, res: SR) => void | Object;
 
@@ -14,19 +15,32 @@ enum RequestMethods {
   PATCH = "PATCH",
 }
 
-type route = (delegate: Delegate) => RouteDelegator;
+type route = (delegate?: Delegate) => RouteDelegator;
 
 class RouteDelegator {
   delegateMap = new Map<RequestMethods, Delegate>();
 
-  private addDelegate(method: RequestMethods, delegate: Delegate) {
-    this.delegateMap.set(method, delegate);
+  private addDelegate(
+    method: RequestMethods,
+    delegate: Delegate = () => "Route Undeclared"
+  ) {
+    this.delegateMap.set(method, (req, res) => {
+      try {
+        return delegate(req, res);
+      } catch (e: unknown) {
+        return sendErrorResponse(res, e, 500);
+      }
+    });
   }
 
   private delegate(req: IM, res: SR): void | Object {
     const method = (req.method || "") as RequestMethods;
     if (!this.delegateMap.has(method)) {
-      throw new Error(`Trying to call undefined delegate for ${method}`);
+      return sendErrorResponse(
+        res,
+        `Trying to call undefined delegate for ${method}`,
+        500
+      );
     }
     return this.delegateMap.get(method)(req, res);
   }

@@ -3,14 +3,10 @@ import { useBody } from "h3";
 
 const router = useRouter();
 
-router.get(async (req, res) => {
-  return "Hello Api!";
-});
+router.get((req, res) => "Hello Api!!");
 
 router.post(async (req, res) => {
-  const body = await useBody(req);
-
-  return body;
+  return await useBody(req);
 });
 
 export default router.routes();
