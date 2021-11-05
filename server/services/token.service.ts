@@ -27,7 +27,7 @@ export const userFromToken = async (token: string): Promise<UserDoc | null> => {
   if (!t || t.exp < Date.now()) {
     return null;
   }
-  return await User.findById({ _id: t.user });
+  return await User.findById(t.user);
 };
 
 export const storeToken = async (
