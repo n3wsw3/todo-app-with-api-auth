@@ -3,11 +3,26 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
-    "start": "node .output/server"
+    "start": "node .output/server",
+    "format": "prettier . --write"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/crypto-js": "^4.0.2",
+    "@types/uuid": "^8.3.1",
+    "@types/validator": "^13.6.3",
     "less": "^4.1.2",
     "less-loader": "^10.1.0",
-    "nuxt3": "latest"
+    "nuxt3": "latest",
+    "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "crypto-js": "^4.1.1",
+    "http-status-codes": "^2.1.4",
+    "mongoose": "^6.0.10",
+    "mongoose-beautiful-unique-validation": "^7.1.1",
+    "uuid": "^8.3.2",
+    "validator": "^13.6.0"
   }
 }
