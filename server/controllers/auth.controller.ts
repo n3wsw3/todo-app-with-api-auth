@@ -68,6 +68,6 @@ export const logout = async (req: IncomingMessage, res: ServerResponse) => {
 };
 
 export const testToken = async (req: IM, res: ServerResponse) => {
-  if (req.user) return sendMessageResponse(res, "Success", StatusCodes.ACCEPTED);
-  sendErrorResponse(res, "Token Not Valid", StatusCodes.BAD_REQUEST);
+  if (req.isAuthenticated()) return sendMessageResponse(res, "Success", StatusCodes.ACCEPTED);
+  else sendErrorResponse(res, "Token Not Valid", StatusCodes.BAD_REQUEST);
 };
