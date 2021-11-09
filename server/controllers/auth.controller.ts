@@ -5,69 +5,43 @@
 import { User } from "../models/user.model";
 import { StatusCodes } from "http-status-codes";
 import { Token } from "../models/token.model";
-import { IncomingMessage, ServerResponse } from "http";
-import { useBody } from "h3";
-import {
-  sendErrorResponse,
-  sendJsonResponse,
-  sendMessageResponse,
-} from "../utils/response";
-import {
-  createAuthenticationTokens
-} from "../services/token.service";
-import mongoose from "mongoose";
-import { IM } from "../../server";
+import { createAuthenticationTokens } from "../services/token.service";
 
-export const register = async (req: IncomingMessage, res: ServerResponse) => {
-  await new User(await useBody(req))
-    .save()
-    .then((user) => {
-      const token = createAuthenticationTokens(user);
-      sendJsonResponse(res, { token, user }, StatusCodes.CREATED);
-    })
-    .catch((err) => {
-      if (err instanceof mongoose.Error.ValidationError) {
-        sendErrorResponse(res, err.errors, StatusCodes.BAD_REQUEST);
-      } else if (err instanceof mongoose.Error) {
-        sendErrorResponse(res, err.message, StatusCodes.BAD_REQUEST);
-      } else {
-        sendErrorResponse(
-          res,
-          "Internal Server Error",
-          StatusCodes.INTERNAL_SERVER_ERROR
-        );
-      }
-    });
-};
+import { Request, Response } from "express";
+import { catchAsync } from "../utils/catchAsync";
 
-export const login = async (req: IncomingMessage, res: ServerResponse) => {
-  const { email, password } = await useBody(req);
+export const register = catchAsync(async (req: Request, res: Response) => {
+  await new User(req.body).save().then((user) => {
+    const token = createAuthenticationTokens(user);
+    res.status(StatusCodes.CREATED).json({ token, user });
+  });
+});
+
+export const login = catchAsync(async (req: Request, res: Response) => {
+  const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (user && (await user.isPasswordMatch(password))) {
     const token = await createAuthenticationTokens(user);
 
-    return sendJsonResponse(res, { token, user }, StatusCodes.OK);
+    return res.status(200).json({ token, user });
   }
+  res
+    .status(StatusCodes.UNAUTHORIZED)
+    .send("Email and/or password is incorrect");
+});
 
-  sendErrorResponse(
-    res,
-    "Email and/or password is incorrect",
-    StatusCodes.UNAUTHORIZED
-  );
-};
-
-export const logout = async (req: IncomingMessage, res: ServerResponse) => {
-  const { token } = await useBody(req);
+export const logout = catchAsync(async (req: Request, res: Response) => {
+  const { token } = req.body;
   const t = await Token.findOne({ token });
   if (t) {
     await t.remove();
-    return sendJsonResponse(res, "Logged out", StatusCodes.OK);
+    return res.status(StatusCodes.OK).send("Logged out");
   }
 
-  sendErrorResponse(res, "No such api token", StatusCodes.NOT_FOUND);
-};
+  res.status(StatusCodes.NOT_FOUND).send("No such api token");
+});
 
-export const testToken = async (req: IM, res: ServerResponse) => {
-  if (req.isAuthenticated()) return sendMessageResponse(res, "Success", StatusCodes.ACCEPTED);
-  else sendErrorResponse(res, "Token Not Valid", StatusCodes.BAD_REQUEST);
-};
+export const testToken = catchAsync(async (req: Request, res: Response) => {
+  if (req.user) return res.status(200).send();
+  else res.status(StatusCodes.BAD_REQUEST).send();
+});
