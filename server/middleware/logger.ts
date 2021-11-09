@@ -13,5 +13,5 @@ var connection: typeof mongoose;
 })();
 
 export default async (req: IM, res: SR) => {
-  console.log(req.url);
+  console.log(req.url, req.method);
 };
