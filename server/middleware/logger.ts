@@ -8,7 +8,7 @@ var connection: typeof mongoose;
   if (!connection) {
     connection = await mongoose.connect("mongodb://localhost/todo");
     mongoose.plugin(beautifyUnique);
-    console.log("Connecting to MongoDB");
+    console.log("Connected to MongoDB");
   }
 })();
 
