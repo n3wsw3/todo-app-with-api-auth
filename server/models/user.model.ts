@@ -54,6 +54,15 @@ const UserSchema = new mongoose.Schema<UserDoc>(
   }
 );
 
+/**
+ * Every time the password field is updated in the user document 
+ * and then saved to the database, it will automatically convert 
+ * the plaintext password to the password hash.
+ * 
+ * This means you should never call generatePasswordHash when 
+ * updating the password for a user. This will cause the password 
+ * to be double hashed.
+ */
 UserSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
     this.password = await generatePasswordHash(this.password);
