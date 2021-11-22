@@ -11,7 +11,7 @@ const OPTIONS = {
   hashLength: 32,
   secret: Buffer.from(process.env.pepper ?? "Test"), 
   parallelism: 1,
-  timeCost: 3, // Iteration count
+  timeCost: 10, // Iteration count
   memoryCost: 1 << 14, // 2^14 KiB meaning 16 MiB. 
   type: argon2id,
 };
