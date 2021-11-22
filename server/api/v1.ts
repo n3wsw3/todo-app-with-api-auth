@@ -3,6 +3,19 @@ import { StatusCodes } from "http-status-codes";
 import mongoose from "mongoose";
 import UserError from "../utils/UserError";
 import routes from "../routes";
+import beautifyUnique from "../utils/uniqueValidationBeautifierPlugin";
+
+/**
+ * Initialize mongodb connection
+ */
+var connection: typeof mongoose;
+(async () => {
+  if (!connection) {
+    connection = await mongoose.connect("mongodb://localhost/todo");
+    mongoose.plugin(beautifyUnique);
+    console.log("Connected to MongoDB");
+  }
+})();
 
 const app = express();
 
