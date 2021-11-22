@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ todo.title }}
+    {{ todo.message }}
     <button
       @click="
         isEditing = !isEditing;
@@ -14,15 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-defineProps<{ todo: todo }>();
+defineProps<{ todo: Todo }>();
 
 const emit = defineEmits<{ (e: "mrnoob", msg: string): void }>();
-
-interface todo {
-  id: string;
-  title: string;
-  user: string;
-}
 
 let isEditing = ref(false);
 
