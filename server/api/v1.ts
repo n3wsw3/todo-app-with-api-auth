@@ -1,5 +1,4 @@
-import { createRouter } from "../utils/router";
-import { createApp, sendError, H3Error } from "h3";
+import { createApp, sendError } from "h3";
 import routes from "../routes";
 import mongoose from "mongoose";
 import beautifyUnique from "../utils/uniqueValidationBeautifierPlugin";
