@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-defineProps<{ todo: Todo }>();
+defineProps<{ todo: {message: string} }>();
 
 const emit = defineEmits<{ (e: "mrnoob", msg: string): void }>();
 

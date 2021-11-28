@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-const HelloAPI = await $fetch("/api/v1/hello");
+const HelloAPI = await $fetch<string>("/api/v1/hello").catch(err => console.log(err));
 
 let counter = ref(0);
 const increase = () => counter.value++;

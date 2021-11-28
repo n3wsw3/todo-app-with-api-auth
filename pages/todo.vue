@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts" setup>
-const todos = ref(await $fetch("/api/v1/todo") as Todo[]);
+const todos = ref(await $fetch<Todo[]>("/api/v1/todo"));
 
 let addTodo = (message: string) => {
   todos.value.push({ message, user: "", id: "" });
