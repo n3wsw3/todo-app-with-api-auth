@@ -1,10 +1,13 @@
-import { Router } from "express";
+import { createRouter } from "../utils/router";
+import { send, useBody, MIMES } from "h3";
 
-const router = Router();
+const router = createRouter();
 
-router.get("/", (_, res) => res.send("Hello Api!"));
-router.post("/", (req, res) => {
-  res.json(req.body);
-})
+router.get("/", [(_, res) => "HELLO API!"]);
+router.post("/", [
+  async (req, res) => {
+    return await send(res, await useBody(req), MIMES.json);
+  },
+]);
 
 export default router;

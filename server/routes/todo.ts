@@ -1,9 +1,9 @@
-import { Router } from "express";
+import { createRouter } from "../utils/router";
 
-const router = Router();
+const router = createRouter();
 
-router.get("/", (req, res) =>
-  res.json([
+router.get("/", [
+  (req, res) => [
     {
       id: "12345",
       message: "FÖRSTA TODO",
@@ -14,7 +14,7 @@ router.get("/", (req, res) =>
       message: "ANDRA TODO",
       user: "192319823",
     },
-  ] as Todo[])
-);
+  ],
+]);
 
 export default router;
