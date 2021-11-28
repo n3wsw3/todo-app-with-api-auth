@@ -1,9 +1,11 @@
 import { StatusCodes } from "http-status-codes";
 import { Todo } from "../models/todo.model";
-import { catchAsync } from "../utils/catchAsync";
+import { useBody } from "h3";
+import { IncomingMessage, ServerResponse } from "http";
 
-export const createTodo = catchAsync(async (req, res) => {
-  await new Todo(req.body).save().then((todo) => {
-    res.status(StatusCodes.CREATED).json(todo);
+export const createTodo = async (req: IncomingMessage, res: ServerResponse) => {
+  return await new Todo(await useBody(req)).save().then(async (todo) => {
+    res.statusCode = StatusCodes.CREATED;
+    return todo;
   });
-});
+};
