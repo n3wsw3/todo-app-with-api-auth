@@ -1,9 +1,20 @@
-import { createError, PHandle, send, MIMES, Handle } from "h3";
+import { createError, PHandle, send, MIMES } from "h3";
 import { IncomingMessage, ServerResponse } from "http";
+import { Match, match, MatchResult } from "./path-matcher";
+
+export type RouteInfo = {
+  [key: string]: string;
+}
+
+export type Handle<P extends RouteInfo = any, T = any> = (
+  req: IncomingMessage,
+  res: ServerResponse,
+  params?: P
+) => T;
 
 export interface Layer {
   route: string;
-  handle: Handle;
+  handle: Handle<any>;
   method?: string;
 }
 
@@ -14,7 +25,7 @@ export interface RRequestOptions {
 }
 
 export interface RRequest {
-  (route: string, handle: [Handle], options?: RRequestOptions): Router;
+  <P extends RouteInfo>(route: string, handle: [Handle<P>], options?: RRequestOptions): Router;
 }
 
 export interface Router {
@@ -43,7 +54,11 @@ export function createRouter(): Router {
   router._handle = _handle;
 
   //@ts-ignore
-  router.use = (route, handles, options = {}) => {
+  router.use = <P extends RouteInfo>(
+    route,
+    handles: Handle<P>[],
+    options: RRequestOptions = {}
+  ) => {
     handles.forEach((handle) =>
       router.stack.push({ route, handle, method: options.method })
     );
@@ -83,11 +98,17 @@ export function createHandle(stack: Stack): PHandle {
     req.originalUrl = req.originalUrl || req.url || "/";
     const reqUrl = req.url || "/";
     for (const layer of stack) {
+      let result: Match;
       if (layer.route.length > 1) {
-        if (!reqUrl.startsWith(layer.route)) {
+        const matcher = match(layer.route, {
+          decode: decodeURIComponent,
+          end: false,
+        });
+        result = matcher(reqUrl);
+        if (!result) {
           continue;
         }
-        req.url = reqUrl.substr(layer.route.length) || "/";
+        req.url = reqUrl.substr(result.path.length) || "/";
       } else {
         req.url = reqUrl;
       }
@@ -97,8 +118,12 @@ export function createHandle(stack: Stack): PHandle {
       ) {
         continue;
       }
-      
-      const val = await layer.handle(req, res);
+
+      const val = await layer.handle(
+        req,
+        res,
+        (result as MatchResult).params as RouteInfo ?? {}
+      );
       if (res.writableEnded) {
         return;
       }
