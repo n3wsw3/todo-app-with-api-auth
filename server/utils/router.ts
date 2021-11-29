@@ -4,7 +4,7 @@ import { Match, match, MatchResult } from "./path-matcher";
 
 export type RouteInfo = {
   [key: string]: string;
-}
+};
 
 export type Handle<P extends RouteInfo = any, T = any> = (
   req: IncomingMessage,
@@ -25,7 +25,11 @@ export interface RRequestOptions {
 }
 
 export interface RRequest {
-  <P extends RouteInfo>(route: string, handle: [Handle<P>], options?: RRequestOptions): Router;
+  <P extends RouteInfo>(
+    route: string,
+    handle: [Handle<P>],
+    options?: RRequestOptions
+  ): Router;
 }
 
 export interface Router {
@@ -122,7 +126,7 @@ export function createHandle(stack: Stack): PHandle {
       const val = await layer.handle(
         req,
         res,
-        (result as MatchResult).params as RouteInfo ?? {}
+        ((result as MatchResult).params as RouteInfo) ?? {}
       );
       if (res.writableEnded) {
         return;

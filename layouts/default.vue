@@ -1,8 +1,6 @@
 <template>
   <div class="main-wrapper">
-    <nav>
-      Navbar template
-    </nav>
+    <nav>Navbar template</nav>
     <h1>This is a demo Application</h1>
     <slot></slot>
   </div>
@@ -15,7 +13,7 @@ body {
   margin: 0;
   padding: 0;
 
-  background-color: .colors()[BG];
+  background-color: .colors() [BG];
 }
 
 .main-wrapper {
@@ -27,7 +25,7 @@ body {
   }
 
   h1 {
-    color: .colors()[text];
+    color: .colors() [text];
   }
 }
 </style>

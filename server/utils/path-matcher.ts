@@ -8,7 +8,7 @@
 /**
  * Tokenizer results.
  */
- interface LexToken {
+interface LexToken {
   type:
     | "OPEN"
     | "CLOSE"
@@ -197,7 +197,7 @@ export function parse(str: string, options: ParseOptions = {}): Token[] {
         prefix,
         suffix: "",
         pattern: pattern || defaultPattern,
-        modifier: tryConsume("MODIFIER") || ""
+        modifier: tryConsume("MODIFIER") || "",
       });
       continue;
     }
@@ -227,7 +227,7 @@ export function parse(str: string, options: ParseOptions = {}): Token[] {
         pattern: name && !pattern ? defaultPattern : pattern,
         prefix,
         suffix,
-        modifier: tryConsume("MODIFIER") || ""
+        modifier: tryConsume("MODIFIER") || "",
       });
       continue;
     }
@@ -276,7 +276,7 @@ export function tokensToFunction<P extends object = object>(
   const { encode = (x: string) => x, validate = true } = options;
 
   // Compile all the tokens into regexps.
-  const matches = tokens.map(token => {
+  const matches = tokens.map((token) => {
     if (typeof token === "object") {
       return new RegExp(`^(?:${token.pattern})$`, reFlags);
     }
@@ -398,7 +398,7 @@ export function regexpToFunction<P extends object = object>(
 ): MatchFunction<P> {
   const { decode = (x: string) => x } = options;
 
-  return function(pathname: string) {
+  return function (pathname: string) {
     const m = re.exec(pathname);
     if (!m) return false;
 
@@ -412,7 +412,7 @@ export function regexpToFunction<P extends object = object>(
       const key = keys[i - 1];
 
       if (key.modifier === "*" || key.modifier === "+") {
-        params[key.name] = m[i].split(key.prefix + key.suffix).map(value => {
+        params[key.name] = m[i].split(key.prefix + key.suffix).map((value) => {
           return decode(value, key);
         });
       } else {
@@ -471,7 +471,7 @@ function regexpToRegexp(path: RegExp, keys?: Key[]): RegExp {
       prefix: "",
       suffix: "",
       modifier: "",
-      pattern: ""
+      pattern: "",
     });
     execResult = groupsRegex.exec(path.source);
   }
@@ -487,7 +487,7 @@ function arrayToRegexp(
   keys?: Key[],
   options?: TokensToRegexpOptions & ParseOptions
 ): RegExp {
-  const parts = paths.map(path => pathToRegexp(path, keys, options).source);
+  const parts = paths.map((path) => pathToRegexp(path, keys, options).source);
   return new RegExp(`(?:${parts.join("|")})`, flags(options));
 }
 
@@ -545,7 +545,7 @@ export function tokensToRegexp(
     strict = false,
     start = true,
     end = true,
-    encode = (x: string) => x
+    encode = (x: string) => x,
   } = options;
   const endsWith = `[${escapeString(options.endsWith || "")}]|$`;
   const delimiter = `[${escapeString(options.delimiter || "/#?")}]`;

@@ -1,22 +1,18 @@
 @darken-factor: 12%;
-@colors: 
-    accent #fe5850,
-    subtle #2196f3,
-    BG     #e6f4f1,
-    BG-plus#bee9e8,
-    text   #2e282a;
+@colors: accent #fe5850, subtle #2196f3, BG #e6f4f1, BG-plus#bee9e8,
+  text #2e282a;
 
 #gen(@i: length(@colors)) when (@i > 0) {
-    #gen(@i - 1);
-    @device: extract(@colors, @i);
-    @name: extract(@device, 1);
-    @color: extract(@device, 2);
+  #gen(@i - 1);
+  @device: extract(@colors, @i);
+  @name: extract(@device, 1);
+  @color: extract(@device, 2);
 
-    @{name}: @color;
-    @{name}-hover: darken(@color, @darken-factor);
-    @{name}-click: darken(darken(@color, @darken-factor), @darken-factor);
+  @{name}: @color;
+  @{name}-hover: darken(@color, @darken-factor);
+  @{name}-click: darken(darken(@color, @darken-factor), @darken-factor);
 }
 
 .colors {
-    #gen();
+  #gen();
 }

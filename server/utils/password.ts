@@ -9,10 +9,10 @@ const { hash, argon2id, verify } = argon;
 const OPTIONS = {
   saltLength: 16, // Will generate a cryptographically safe salt with length 16 bytes
   hashLength: 32,
-  secret: Buffer.from(process.env.pepper ?? "Test"), 
+  secret: Buffer.from(process.env.pepper ?? "Test"),
   parallelism: 1,
   timeCost: 10, // Iteration count
-  memoryCost: 1 << 14, // 2^14 KiB meaning 16 MiB. 
+  memoryCost: 1 << 14, // 2^14 KiB meaning 16 MiB.
   type: argon2id,
 };
 
