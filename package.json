@@ -27,6 +27,8 @@
     "validator": "^13.7.0"
   },
   "lint-staged": {
-    "*.--write": "prettier --write"
+    "*.--write": "prettier --write",
+    "*.ts": "prettier --write",
+    "*.vue": "prettier --write"
   }
 }
