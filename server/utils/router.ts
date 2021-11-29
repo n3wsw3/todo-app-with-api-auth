@@ -123,11 +123,7 @@ export function createHandle(stack: Stack): PHandle {
         continue;
       }
 
-      const val = await layer.handle(
-        req,
-        res,
-        ((result as MatchResult).params as RouteInfo) ?? {}
-      );
+      const val = await layer.handle(req, res, result ? result.params : {});
       if (res.writableEnded) {
         return;
       }
