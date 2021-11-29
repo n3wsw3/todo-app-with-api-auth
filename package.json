@@ -4,14 +4,17 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "start": "node .output/server",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/uuid": "^8.3.1",
     "@types/validator": "^13.6.3",
+    "husky": "^7.0.4",
     "less": "^4.1.2",
     "less-loader": "^10.1.0",
+    "lint-staged": "^12.1.2",
     "nuxt3": "latest",
     "prettier": "^2.4.1"
   },
@@ -22,5 +25,8 @@
     "mongoose": "^6.0.10",
     "uuid": "^8.3.2",
     "validator": "^13.7.0"
+  },
+  "lint-staged": {
+    "*.--write": "prettier --write"
   }
 }
