@@ -6,6 +6,7 @@ import beautifyUnique from "../utils/uniqueValidationBeautifierPlugin";
 /**
  * Initialize mongodb connection
  */
+
 var connection: typeof mongoose;
 (async () => {
   if (!connection) {
