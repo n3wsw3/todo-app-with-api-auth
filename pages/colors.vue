@@ -14,7 +14,7 @@
     <UICircle class="text hover"></UICircle>
   </div>
   <div>
-    <UICircle class="accent active"></UICircle>
+<UICircle class="accent active"></UICircle>
     <UICircle class="subtle active"></UICircle>
     <UICircle class="BG active"></UICircle>
     <UICircle class="BG-plus active"></UICircle>
