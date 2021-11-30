@@ -1,5 +1,5 @@
 <template>
-  <todo v-for="todo in todos" :todo="todo" @mrnoob="addTodo($event)"></todo>
+  <todo v-for="todo in todos" :todo="todo"></todo>
   <button @click="addTodo('new')">CREATE</button>
 </template>
 
@@ -10,5 +10,3 @@ let addTodo = (message: string) => {
   todos.value.push({ message, user: "", id: "" });
 };
 </script>
-
-<style lang="less" scoped></style>

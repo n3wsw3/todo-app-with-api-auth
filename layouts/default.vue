@@ -9,11 +9,16 @@
 <style lang="less">
 @import "assets/definitions.less";
 
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 body {
   margin: 0;
   padding: 0;
 
   background-color: .colors() [BG];
+  box-sizing: border-box;
 }
 
 .main-wrapper {
