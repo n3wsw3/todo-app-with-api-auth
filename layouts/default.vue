@@ -19,6 +19,7 @@ body {
 
   background-color: .colors() [BG];
   box-sizing: border-box;
+  color: .colors() [text];
 }
 
 .main-wrapper {
@@ -28,10 +29,6 @@ body {
 
   nav {
     height: 50px;
-  }
-
-  h1 {
-    color: .colors() [text];
   }
 }
 </style>
