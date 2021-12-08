@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
 
-export interface TokenDoc extends mongoose.Document {
+export interface IToken {
   token: string;
   user: mongoose.ObjectId;
   exp: number; // Unix time
 }
+
+export interface TokenDoc extends IToken, mongoose.Document {}
 
 const TokenSchema = new mongoose.Schema<TokenDoc>({
   token: {

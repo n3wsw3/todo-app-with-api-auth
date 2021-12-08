@@ -2,10 +2,13 @@ import mongoose from "mongoose";
 import validator from "validator";
 import { generatePasswordHash, isPasswordMatch } from "../utils/password";
 
-export interface UserDoc extends mongoose.Document {
+export interface IUser {
   name: string;
   email: string;
   password: string;
+}
+
+export interface UserDoc extends IUser, mongoose.Document {
   isPasswordMatch: (password: string) => Promise<boolean>;
 }
 
