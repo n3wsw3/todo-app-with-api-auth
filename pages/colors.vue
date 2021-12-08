@@ -31,26 +31,26 @@
 }
 
 .accent {
-  background-color: .colors() [accent];
+  background-color: .colors() [second];
 
   &.hover {
-    background-color: .colors() [accent-hover];
+    background-color: .colors() [second-hover];
   }
 
   &.active {
-    background-color: .colors() [accent-click];
+    background-color: .colors() [second-click];
   }
 }
 
 .subtle {
-  background-color: .colors() [subtle];
+  background-color: .colors() [primary];
 
   &.hover {
-    background-color: .colors() [subtle-hover];
+    background-color: .colors() [primary-hover];
   }
 
   &.active {
-    background-color: .colors() [subtle-click];
+    background-color: .colors() [primary-click];
   }
 }
 
