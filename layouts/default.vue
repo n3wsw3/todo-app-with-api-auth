@@ -24,6 +24,7 @@ body {
 .main-wrapper {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 0.5em;
 
   nav {
     height: 50px;
