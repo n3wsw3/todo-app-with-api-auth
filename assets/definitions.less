@@ -1,6 +1,7 @@
+// out: false
 @darken-factor: 12%;
-@colors: accent #fe5850, subtle #2196f3, BG #e6f4f1, BG-plus#bee9e8,
-  text #2e282a;
+@colors: second #00dac6, primary #bb86fc, BG #121212, BG-plus#1f1f1f,
+  text #e2e2e2, text-accent #949494, error #CF6679;
 
 #gen(@i: length(@colors)) when (@i > 0) {
   #gen(@i - 1);
