@@ -40,6 +40,7 @@ export interface Router {
   post: RRequest;
   get: RRequest;
   put: RRequest;
+  patch: RRequest;
 }
 
 export function createRouter(): Router {
@@ -90,6 +91,14 @@ export function createRouter(): Router {
       route,
       handles,
       Object.assign(options, { method: "PUT" })
+    );
+  };
+
+  router.patch = (route, handles, options = {}) => {
+    return router.use(
+      route,
+      handles,
+      Object.assign(options, { method: "PATCH" })
     );
   };
 
