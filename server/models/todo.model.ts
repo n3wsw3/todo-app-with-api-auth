@@ -11,12 +11,17 @@ export interface TodoDoc extends ITodo, mongoose.Document {}
 const TodoSchema = new mongoose.Schema<TodoDoc>(
   {
     message: {
+      type: String,
       required: true,
       trim: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+    },
+    test: {
+      type: String,
+      required: false,
     },
   },
   {
