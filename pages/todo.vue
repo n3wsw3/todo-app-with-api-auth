@@ -1,6 +1,7 @@
 <template>
   <ClientOnly>
     <UITodos />
+    <template #fallback> Loading... </template>
   </ClientOnly>
 </template>
 
