@@ -1,20 +1,17 @@
+import {
+  createTodo,
+  getTodo,
+  getTodos,
+  updateTodo,
+} from "../controllers/todo.controller";
 import { createRouter } from "../utils/router";
 
 const router = createRouter();
 
-router.get("/", [
-  (req, res) => [
-    {
-      id: "12345",
-      message: "FÖRSTA TODO",
-      user: "192319823",
-    },
-    {
-      id: "23434",
-      message: "ANDRA TODO",
-      user: "192319823",
-    },
-  ],
-]);
+router.get("/", [getTodos]);
+router.post("/", [createTodo]);
+
+router.get<{ id: string }>("/:id", [getTodo]);
+router.patch<{ id: string }>("/:id", [updateTodo]);
 
 export default router;
