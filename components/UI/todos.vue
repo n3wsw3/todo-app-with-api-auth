@@ -1,17 +1,25 @@
 <template>
-  <UITodo
-    v-for="todo in todos"
-    :todo="todo"
-    @update="changeTodo(todo.id, $event)"
-  ></UITodo>
-  <button @click="addTodo('new')">CREATE</button>
+  <div v-if="error">{{ error.message }}</div>
+  <template v-else>
+    <UITodo
+      v-for="todo in todos"
+      :todo="todo"
+      @update="changeTodo(todo.id, $event)"
+    ></UITodo>
+    <button @click="addTodo('new')">CREATE</button>
+  </template>
 </template>
 
 <script lang="ts" setup>
 const auth = useAuth();
+const error = ref<{ message?: string }>({});
 const todos = ref(
   await $fetch<Todo[]>("/api/v1/todo", {
     headers: { authorization: auth.value },
+  }).catch((err) => {
+    console.log(err.data);
+    error.value = err.data;
+    return [];
   })
 );
 
