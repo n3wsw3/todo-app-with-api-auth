@@ -1,9 +1,16 @@
-import { createApp, sendError, send, MIMES, H3Error } from "h3";
+import { createApp, H3Error } from "h3";
 import routes from "../routes";
 import mongoose from "mongoose";
 import beautifyUnique from "../utils/uniqueValidationBeautifierPlugin";
 import UserError from "../utils/UserError";
 import { StatusCodes } from "http-status-codes";
+import { ServerResponse } from "http";
+
+export const n3sendError = (res: ServerResponse, error: any, code: number) => {
+  res.statusCode = code;
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify({ error }));
+};
 
 /**
  * Initialize mongodb connection
@@ -12,9 +19,14 @@ import { StatusCodes } from "http-status-codes";
 var connection: typeof mongoose;
 (async () => {
   if (!connection) {
-    connection = await mongoose.connect("mongodb://localhost/todo");
+    await mongoose
+      .connect("mongodb://localhost/todo")
+      .then((con) => {
+        connection = con;
+        console.log("Connected to MongoDB");
+      })
+      .catch((err) => console.error(`Could not connect to mongodb: ${err}`));
     mongoose.plugin(beautifyUnique);
-    console.log("Connected to MongoDB");
   }
 })();
 
@@ -23,14 +35,12 @@ const app = createApp({
     console.log(error);
     res.statusCode = 500;
     if (error instanceof H3Error) {
-      res.statusCode = error.statusCode;
-      send(res, { message: error.message, error }, MIMES.json);
+      n3sendError(res, error.statusMessage, error.statusCode);
     } else if (error instanceof UserError) {
-      res.statusCode = StatusCodes.BAD_REQUEST;
-      res.end(JSON.stringify({ message: error.message }));
+      n3sendError(res, error.message, error.code);
+    } else {
+      n3sendError(res, error, StatusCodes.INTERNAL_SERVER_ERROR);
     }
-    // send(res, error, MIMES.json);
-    res.end(JSON.stringify(error));
   },
 });
 
