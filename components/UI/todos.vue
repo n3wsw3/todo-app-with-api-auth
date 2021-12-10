@@ -1,5 +1,5 @@
 <template>
-  <div v-if="error">{{ error.message }}</div>
+  <div v-if="error">{{ error }}</div>
   <template v-else>
     <UITodo
       v-for="todo in todos"
@@ -11,14 +11,13 @@
 </template>
 
 <script lang="ts" setup>
-const auth = useAuth();
-const error = ref<{ message?: string }>({});
+import auth from "../../utility/auth";
+const error = ref<string>("");
 const todos = ref(
   await $fetch<Todo[]>("/api/v1/todo", {
     headers: { authorization: auth.value },
   }).catch((err) => {
-    console.log(err.data);
-    error.value = err.data;
+    error.value = err.data.error;
     return [];
   })
 );
