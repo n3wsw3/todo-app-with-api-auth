@@ -7,7 +7,6 @@ import auth from "../utility/auth";
 const router = useRouter();
 
 onMounted(async () => {
-  console.log(auth.value);
   await $fetch<Todo[]>("/api/v1/auth/logout", {
     method: "POST",
     headers: { authorization: auth.value },
