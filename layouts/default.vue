@@ -1,7 +1,6 @@
 <template>
   <div class="main-wrapper">
-    <nav>Navbar template</nav>
-    <h1>This is a demo Application</h1>
+    <NavBar />
     <slot></slot>
   </div>
 </template>
@@ -11,6 +10,7 @@
 
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  box-sizing: border-box;
 }
 
 body {
@@ -26,9 +26,5 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 0.5em;
-
-  nav {
-    height: 50px;
-  }
 }
 </style>
