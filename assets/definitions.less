@@ -18,3 +18,66 @@
 .colors {
   #gen();
 }
+
+button.n3 {
+  @size: 30px;
+  margin: 0 0.2em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  height: @size;
+
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-width: 2px;
+  line-height: @size - 2 * $padding - 2 * $border-width;
+  font-size: @size - 2 * $padding - 2 * $border-width;
+
+  color: .colors() [primary];
+
+  background: linear-gradient(.colors() [BG-plus], .colors() [BG-plus])
+      padding-box,
+    linear-gradient(to right, .colors() [primary], .colors() [primary-hover])
+      border-box;
+  border: 2px solid transparent;
+
+  &:hover {
+    background: linear-gradient(.colors() [BG-plus], .colors() [BG-plus])
+        padding-box,
+      linear-gradient(
+          to right,
+          .colors() [primary-hover],
+          .colors() [primary-click]
+        )
+        border-box;
+  }
+
+  &:active {
+    background: linear-gradient(.colors() [BG-plus], .colors() [BG-plus])
+        padding-box,
+      .colors() [primary-click] border-box;
+  }
+
+  &.primary {
+    border: none;
+    background: linear-gradient(
+      to right,
+      .colors() [primary],
+      .colors() [primary-hover]
+    );
+    color: .colors() [text];
+
+    &:hover {
+      background: linear-gradient(
+        to right,
+        .colors() [primary-hover],
+        .colors() [primary-click]
+      );
+    }
+
+    &:active {
+      box-shadow: inset 1px 1px 3px 0px .colors() [primary-click];
+    }
+  }
+}
