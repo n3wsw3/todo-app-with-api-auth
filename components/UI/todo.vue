@@ -16,16 +16,17 @@
       <input type="text" v-model="tempValue" />
     </div>
     <div class="buttons">
-      <button v-if="!isEditing" @click="edit" class="primary">Edit</button>
-      <button v-else @click="save" class="primary">Save</button>
-      <button>Delete</button>
+      <button v-if="!isEditing" @click="edit" class="n3 primary">Edit</button>
+      <button v-else @click="save" class="n3 primary">Save</button>
+      <button @click="remove" class="n3">Delete</button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 const props = defineProps<{ todo: Todo }>();
-const emit = defineEmits<{ (e: "update", msg: string): void }>();
+const emit =
+  defineEmits<{ (e: "update", msg: string): void; (e: "remove"): void }>();
 
 const isEditing = ref(false);
 const isDone = ref(false);
@@ -39,6 +40,10 @@ const edit = () => {
 const save = () => {
   isEditing.value = false;
   emit("update", tempValue.value);
+};
+
+const remove = () => {
+  emit("remove");
 };
 </script>
 <style lang="less" scoped>
@@ -116,66 +121,5 @@ const save = () => {
 }
 .buttons {
   display: flex;
-  button {
-    margin: 0 0.2em;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    height: auto;
-
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-width: 2px;
-    line-height: @size - 2 * $padding - 2 * $border-width;
-    font-size: @size - 2 * $padding - 2 * $border-width;
-
-    color: .colors() [primary];
-
-    background: linear-gradient(.colors() [BG-plus], .colors() [BG-plus])
-        padding-box,
-      linear-gradient(to right, .colors() [primary], .colors() [primary-hover])
-        border-box;
-    border: 2px solid transparent;
-
-    &:hover {
-      background: linear-gradient(.colors() [BG-plus], .colors() [BG-plus])
-          padding-box,
-        linear-gradient(
-            to right,
-            .colors() [primary-hover],
-            .colors() [primary-click]
-          )
-          border-box;
-    }
-
-    &:active {
-      background: linear-gradient(.colors() [BG-plus], .colors() [BG-plus])
-          padding-box,
-        .colors() [primary-click] border-box;
-    }
-
-    &.primary {
-      border: none;
-      background: linear-gradient(
-        to right,
-        .colors() [primary],
-        .colors() [primary-hover]
-      );
-      color: .colors() [text];
-
-      &:hover {
-        background: linear-gradient(
-          to right,
-          .colors() [primary-hover],
-          .colors() [primary-click]
-        );
-      }
-
-      &:active {
-        box-shadow: inset 1px 1px 3px 0px .colors() [primary-click];
-      }
-    }
-  }
 }
 </style>

@@ -5,8 +5,9 @@
       v-for="todo in todos"
       :todo="todo"
       @update="changeTodo(todo.id, $event)"
+      @remove="deleteTodo(todo.id)"
     ></UITodo>
-    <button @click="addTodo('new')">CREATE</button>
+    <button @click="addTodo('new')" class="n3 primary">CREATE</button>
   </template>
 </template>
 
@@ -39,5 +40,17 @@ const changeTodo = async (id: string, message: string) => {
   });
   const index = todos.value.findIndex((el) => el.id === todo.id);
   todos.value[index] = todo;
+};
+
+const deleteTodo = async (id: string) => {
+  await $fetch(`/api/v1/todo/${id}`, {
+    method: "DELETE",
+    headers: { authorization: auth.value },
+  })
+    .then((resp) => {
+      const index = todos.value.findIndex((el) => el.id === id);
+      todos.value.splice(index, 1);
+    })
+    .catch((err) => console.error(err));
 };
 </script>
