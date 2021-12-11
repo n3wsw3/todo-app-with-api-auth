@@ -33,7 +33,7 @@ export const getTodos = Handler(async (req, res) => {
 export const getTodo = Handler<{ id: string }>(async (req, res, params) => {
   const user = await useAuthenticatedUser(req);
 
-  return await Todo.findOne({ id: params.id, user: user.id });
+  return await Todo.findOne({ _id: params.id, user: user.id });
 });
 
 export const updateTodo = Handler<{ id: string }>(async (req, res, params) => {
@@ -43,7 +43,13 @@ export const updateTodo = Handler<{ id: string }>(async (req, res, params) => {
   delete body.user;
   delete body.id;
 
-  return await Todo.findOneAndUpdate({ id: params.id, user: user.id }, body, {
-    returnDocument: "after",
-  });
+  const todo = await Todo.findOneAndUpdate(
+    { _id: params.id, user: user.id },
+    body,
+    {
+      returnDocument: "after",
+    }
+  );
+
+  return todo;
 });
