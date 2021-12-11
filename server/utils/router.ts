@@ -41,6 +41,7 @@ export interface Router {
   get: RRequest;
   put: RRequest;
   patch: RRequest;
+  delete: RRequest;
 }
 
 export function createRouter(): Router {
@@ -99,6 +100,14 @@ export function createRouter(): Router {
       route,
       handles,
       Object.assign(options, { method: "PATCH" })
+    );
+  };
+
+  router.delete = (route, handles, options = {}) => {
+    return router.use(
+      route,
+      handles,
+      Object.assign(options, { method: "DELETE" })
     );
   };
 

@@ -53,3 +53,14 @@ export const updateTodo = Handler<{ id: string }>(async (req, res, params) => {
 
   return todo;
 });
+
+export const deleteTodo = Handler<{ id: string }>(async (req, res, params) => {
+  const user = await useAuthenticatedUser(req);
+
+  return await Todo.findOneAndDelete({ _id: params.id, user: user.id })
+    .then((resp) => "Success")
+    .catch((err) => {
+      res.statusCode = StatusCodes.BAD_REQUEST;
+      return err;
+    });
+});
