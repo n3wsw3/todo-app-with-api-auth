@@ -27,12 +27,11 @@
       <div class="overlay-container">
         <div class="overlay">
           <div class="overlay-panel overlay-left">
-            <h1>Hello, Stranger!</h1>
+            <h1>Welcome Back!</h1>
             <p>
-              We are not GDPR compliant and we sell your data to the Russian
-              Government and the CCP. <br />Please give us your info.
+              The data you are giving us is valuable to the CCPs fight for
+              <s>obedience</s> freedom.
             </p>
-
             <button
               class="ghost"
               id="signIn"
@@ -42,10 +41,10 @@
             </button>
           </div>
           <div class="overlay-panel overlay-right">
-            <h1>Welcome Back!</h1>
+            <h1>Hello, Stranger!</h1>
             <p>
-              The data you are giving us is valuable to the CCPs fight for
-              <s>obedience</s> freedom.
+              We are not GDPR compliant and we sell your data to the Russian
+              Government and the CCP. <br />Please give us your info.
             </p>
             <button
               class="ghost"
