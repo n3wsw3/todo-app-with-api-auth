@@ -1,5 +1,5 @@
 // out: false
-@darken-factor: 12%;
+@darken-factor: 20%;
 @colors: second #00dac6, primary #bb86fc, BG #121212, BG-plus#1f1f1f,
   text #e2e2e2, text-accent #949494, error #CF6679;
 
@@ -10,9 +10,9 @@
   @color: extract(@device, 2);
 
   @{name}: @color;
-  @{name}-light: lighten(@color, @darken-factor);
-  @{name}-hover: darken(@color, @darken-factor);
-  @{name}-click: darken(darken(@color, @darken-factor), @darken-factor);
+  @{name}-light: saturate(@color, @darken-factor);
+  @{name}-hover: desaturate(@color, @darken-factor);
+  @{name}-click: desaturate(desaturate(@color, @darken-factor), @darken-factor);
 }
 
 .colors {
