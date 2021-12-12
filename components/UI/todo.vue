@@ -1,19 +1,14 @@
 <template>
   <div class="todo">
     <div v-if="!isEditing" class="begin">
-      <label class="input" :for="todo.id + 'done'">
-        <input
-          type="checkbox"
-          name="isDone"
-          :id="todo.id + 'done'"
-          v-model="isDone"
-        />
+      <label class="input">
+        <input type="checkbox" name="isDone" v-model="isDone" />
         <span></span>
       </label>
-      <p class="message">{{ todo.message }}</p>
+      <span class="message">{{ todo.message }}</span>
     </div>
     <div v-else>
-      <input type="text" v-model="tempValue" />
+      <input type="text" v-model="tempValue" class="n3" placeholder="Message" />
     </div>
     <div class="buttons">
       <button v-if="!isEditing" @click="edit" class="n3 primary">Edit</button>
@@ -48,18 +43,16 @@ const remove = () => {
 </script>
 <style lang="less" scoped>
 @import "../assets/definitions.less";
-@size: 30px;
+@size: 40px;
 .todo {
   display: flex;
   justify-content: space-between;
   background-color: .colors() [BG-plus];
-  padding: 0.7em;
+  padding: 0.7em 1.2em;
   border-radius: 10px;
   margin: 10px 0;
   box-shadow: 2px 3px 4px 0px rgb(0 0 0 / 25%), 2px 2px 9px 2px rgb(0 0 0 / 22%);
-  > * {
-    height: @size;
-  }
+
   .begin {
     display: flex;
     @csize: 20px;
@@ -116,6 +109,9 @@ const remove = () => {
     .message {
       margin: 0;
       line-height: @size;
+      font-size: 1em;
+      font-weight: 100;
+      letter-spacing: 0.5px;
     }
   }
 }
