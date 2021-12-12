@@ -4,6 +4,7 @@ export interface ITodo {
   message: string;
   user: mongoose.ObjectId;
   test?: string;
+  isDone: boolean;
 }
 
 export interface TodoDoc extends ITodo, mongoose.Document {}
@@ -22,6 +23,10 @@ const TodoSchema = new mongoose.Schema<TodoDoc>(
     test: {
       type: String,
       required: false,
+    },
+    isDone: {
+      type: Boolean,
+      default: false,
     },
   },
   {
