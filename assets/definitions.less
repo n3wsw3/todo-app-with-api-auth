@@ -1,7 +1,7 @@
 // out: false
 @darken-factor: 12%;
 @colors: second #00dac6, primary #bb86fc, BG #121212, BG-plus#1f1f1f,
-  text #e2e2e2, text-accent #949494, error #CF6679;
+  text #e2e2e2, text-accent #949494, error #cf6679;
 
 #gen(@i: length(@colors)) when (@i > 0) {
   #gen(@i - 1);
@@ -19,9 +19,18 @@
   #gen();
 }
 
+input.n3 {
+  background-color: .colors() [BG-plus-light];
+  border: none;
+  padding: 12px 15px;
+  width: 100%;
+  border-radius: 5px;
+  color: inherit;
+}
+
 button.n3 {
   @size: 30px;
-  margin: 0 0.2em;
+  margin: auto 0.2em;
   border: none;
   border-radius: 10px;
   cursor: pointer;
