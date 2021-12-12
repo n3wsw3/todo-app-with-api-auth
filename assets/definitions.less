@@ -1,4 +1,7 @@
 // out: false
+
+@import (css) url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+
 @darken-factor: 12%;
 @colors: second #00dac6, primary #bb86fc, BG #121212, BG-plus#1f1f1f,
   text #e2e2e2, text-accent #949494, error #cf6679;
@@ -28,7 +31,7 @@ input.n3 {
   color: inherit;
 }
 
-button.n3 {
+button.n3, a.n3 {
   @size: 30px;
   margin: auto 0.2em;
   border: none;
@@ -42,6 +45,8 @@ button.n3 {
   border-width: 2px;
   line-height: @size - 2 * $padding - 2 * $border-width;
   font-size: @size - 2 * $padding - 2 * $border-width;
+
+  text-decoration: none;
 
   color: .colors() [primary];
 
