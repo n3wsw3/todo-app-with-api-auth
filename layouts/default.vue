@@ -1,5 +1,11 @@
 <template>
   <div class="main-wrapper">
+    <Html lang="en">
+      <Head>
+        <Title>Todo Application</Title>
+        <Meta name="description" content="Website used for managing todos" />
+      </Head>
+    </Html>
     <NavBar />
     <slot></slot>
   </div>
