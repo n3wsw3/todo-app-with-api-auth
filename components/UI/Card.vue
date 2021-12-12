@@ -1,15 +1,15 @@
 <template>
   <div class="card">
-    <img :src="src" alt="" />
+    <!-- <img :src="src" alt="" /> -->
     <slot></slot>
   </div>
 </template>
 
-<script lang="ts" setup>
+<!-- <script lang="ts" setup>
 const props = defineProps<{ src: string }>();
-</script>
+</script> -->
 
-<style lang="less" scoped>
+<style lang="less">
 @import "assets/definitions.less";
 .card {
   background-color: .colors() [BG-plus];
