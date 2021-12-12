@@ -1,18 +1,21 @@
 <template>
   <div class="todo">
     <div v-if="!isEditing" class="begin">
-      <label class="input">
-        <input type="checkbox" name="isDone" v-model="isDone" />
-        <span></span>
-      </label>
+      <span
+        class="done"
+        :class="{ true: todo.isDone }"
+        @click="save({ isDone: !todo.isDone })"
+      ></span>
       <span class="message">{{ todo.message }}</span>
     </div>
-    <div v-else>
+    <div v-else class="edit">
       <input type="text" v-model="tempValue" class="n3" placeholder="Message" />
     </div>
     <div class="buttons">
       <button v-if="!isEditing" @click="edit" class="n3 primary">Edit</button>
-      <button v-else @click="save" class="n3 primary">Save</button>
+      <button v-else @click="save({ message: tempValue })" class="n3 primary">
+        Save
+      </button>
       <button @click="remove" class="n3">Delete</button>
     </div>
   </div>
@@ -20,21 +23,21 @@
 
 <script lang="ts" setup>
 const props = defineProps<{ todo: Todo }>();
-const emit =
-  defineEmits<{ (e: "update", msg: string): void; (e: "remove"): void }>();
+const emit = defineEmits<{
+  (e: "update", msg: TodoUpdateRequest): void;
+  (e: "remove"): void;
+}>();
 
 const isEditing = ref(false);
-const isDone = ref(false);
-
 const tempValue = ref(props.todo.message);
 
 const edit = () => {
   isEditing.value = !isEditing.value;
 };
 
-const save = () => {
+const save = (obj: TodoUpdateRequest) => {
   isEditing.value = false;
-  emit("update", tempValue.value);
+  emit("update", obj);
 };
 
 const remove = () => {
@@ -56,56 +59,34 @@ const remove = () => {
   .begin {
     display: flex;
     @csize: 20px;
-    label {
-      display: block;
-      position: relative;
+    > .done {
+      border: 2px solid .colors() [text];
+      border-radius: 100%;
       width: @csize;
       height: @csize;
-      cursor: pointer;
-      font-size: 22px;
-      user-select: none;
       margin: auto;
       margin-right: 10px;
+      cursor: pointer;
 
-      span {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: @csize;
-        width: @csize;
-
-        border: 2px solid .colors() [text];
-        border-radius: 100%;
-
-        &:hover {
-          border-color: .colors() [text-hover];
-        }
-
-        &:active {
-          border-color: .colors() [text-click];
-        }
+      &:hover {
+        border-color: .colors() [text-hover];
       }
 
-      input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-        &:checked ~ span {
-          border: none;
-          &:after {
-            content: "🗸";
-            height: 100%;
-            font-size: @csize;
-            display: block;
-            line-height: @csize - 2;
-            padding-left: 3px;
-          }
+      &:active {
+        border-color: .colors() [text-click];
+      }
+
+      &.true {
+        border: none;
+        font-size: 22px;
+        line-height: @csize;
+
+        &:after {
+          content: "🗸";
+          padding-left: 3px;
         }
       }
     }
-
     .message {
       margin: 0;
       line-height: @size;
@@ -113,6 +94,11 @@ const remove = () => {
       font-weight: 100;
       letter-spacing: 0.5px;
     }
+  }
+
+  .edit {
+    width: 100%;
+    margin-right: 1em;
   }
 }
 .buttons {

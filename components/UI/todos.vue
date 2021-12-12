@@ -32,11 +32,11 @@ const addTodo = async (message: string) => {
   todos.value.push(todo);
 };
 
-const changeTodo = async (id: string, message: string) => {
+const changeTodo = async (id: string, update: TodoUpdateRequest) => {
   const todo = await $fetch<Todo>(`/api/v1/todo/${id}`, {
     method: "PATCH",
     headers: { authorization: auth.value },
-    body: { message },
+    body: update,
   });
   const index = todos.value.findIndex((el) => el.id === todo.id);
   todos.value[index] = todo;
