@@ -1,16 +1,31 @@
 <template>
-  <nav>
-    <RouterLink to="/">Home</RouterLink>
-    <ClientOnly>
+  <nav class="main-wrapper">
+    <RouterLink to="/" class="logo">Todo App</RouterLink>
+    <div>
+      <!-- <RouterLink to="/">Home</RouterLink> -->
+      <ClientOnly v-if="auth">
+        <RouterLink to="/todo">Todos</RouterLink>
+      </ClientOnly>
+    </div>
+    <div>
+      <ClientOnly>
+        <template v-if="auth">
+          <RouterLink to="/logout">Logout</RouterLink>
+        </template>
+        <template v-else>
+          <RouterLink to="/login" class="outline">Login</RouterLink>
+        </template>
+      </ClientOnly>
+    </div>
+    <!-- <ClientOnly>
       <template v-if="auth">
         <RouterLink to="/todo">Todos</RouterLink>
         <RouterLink to="/logout">Logout</RouterLink>
       </template>
       <template v-else>
         <RouterLink to="/login">Login or Register</RouterLink>
-        <!-- <RouterLink to="/register">Register</RouterLink> -->
       </template>
-    </ClientOnly>
+    </ClientOnly> -->
   </nav>
 </template>
 
@@ -24,38 +39,44 @@ import auth from "../../utility/auth";
 nav {
   line-height: 35px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  font-size: 1.3em;
+  font-weight: 500;
+  padding-bottom: 1.5em;
+  > div {
+    display: flex;
+  }
+
   a {
-    padding: 0.5em 1em;
+    padding: 0.3em 0.7em;
     margin: 0 0.5em;
-    color: .colors() [primary];
+    color: .colors() [text];
     text-decoration: none;
     position: relative;
 
     &:visited {
-      color: .colors() [primary];
+      color: .colors() [text];
     }
 
     &:hover {
-      color: .colors() [primary-hover];
+      cursor: pointer;
     }
 
     &:active {
-      color: .colors() [primary-click];
+      color: .colors() [text-hover];
     }
 
-    &.router-link-active {
-      &:before {
-        content: "";
-        position: absolute;
+    &.outline {
+      border: 2px solid .colors() [text];
+      border-radius: 10px;
 
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-
-        background-color: .colors() [primary];
+      &:active {
+        border: 2px solid .colors() [text-hover];
       }
+    }
+
+    &.logo {
+      font-size: 1.3em;
     }
   }
 }
