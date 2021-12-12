@@ -46,27 +46,30 @@
         </p>
       </div>
       <div>
-        <img src="assets/adapting.png" alt="" />
+        <img src="@/assets/adapting.png" alt="" />
       </div>
     </div>
     <div class="spacing">
       <h1 class="center">What we do best</h1>
       <div class="cards">
-        <UICard src="assets/hashing_graphic.webp">
+        <UICard>
+          <img src="@/assets/hashing_graphic.webp" alt="" />
           <h2>Password Hashing Strategy</h2>
           <p>
             Our password hashing strategy has been especially made to adhere to
             the highest of security standards.
           </p>
         </UICard>
-        <UICard src="assets/cicd.png">
+        <UICard>
+          <img src="@/assets/cicd.png" alt="" />
           <h2>Continuous Integration and Continuous Delivery</h2>
           <p>
             Our automated systems guarantee swift and precise delivery, allowing
             for uninterrupted todoing.
           </p>
         </UICard>
-        <UICard src="assets/webdev.png">
+        <UICard>
+          <img src="@/assets/webdev.png" alt="" />
           <h2>Maintainable and High Standards</h2>
           <p>
             Todo App is created using the most forefront technologies and by the
