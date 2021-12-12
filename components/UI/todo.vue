@@ -91,7 +91,6 @@ const remove = () => {
       margin: 0;
       line-height: @size;
       font-size: 1em;
-      font-weight: 100;
       letter-spacing: 0.5px;
     }
   }

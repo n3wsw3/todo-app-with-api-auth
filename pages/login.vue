@@ -119,7 +119,7 @@ const register = async () => {
 // With modifications to color and things like that
 
 h1 {
-  font-weight: bold;
+  font-weight: 500;
   margin: 0;
   margin-bottom: 0.2em;
 }
@@ -130,7 +130,7 @@ h2 {
 
 p {
   font-size: 14px;
-  font-weight: 100;
+  font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
