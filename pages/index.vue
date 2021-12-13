@@ -156,6 +156,5 @@ export default {
 
 .spacing {
   margin: 4em 0;
-  padding-bottom: 4em;
 }
 </style>
