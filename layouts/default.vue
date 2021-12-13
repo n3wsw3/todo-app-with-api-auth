@@ -22,10 +22,7 @@
         </svg>
       </slot>
     </div>
-    <div class="main-wrapper">
-      <slot></slot>
-    </div>
-    <UIFooter></UIFooter>
+    <slot></slot>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-wrapper">
     <h1>Todos</h1>
     <ClientOnly>
       <UITodos />
