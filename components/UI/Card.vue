@@ -1,13 +1,8 @@
 <template>
   <div class="card">
-    <!-- <img :src="src" alt="" /> -->
     <slot></slot>
   </div>
 </template>
-
-<!-- <script lang="ts" setup>
-const props = defineProps<{ src: string }>();
-</script> -->
 
 <style lang="less">
 @import "assets/definitions.less";

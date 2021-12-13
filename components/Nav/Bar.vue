@@ -2,7 +2,6 @@
   <nav class="main-wrapper">
     <RouterLink to="/" class="logo">Todo App</RouterLink>
     <div>
-      <!-- <RouterLink to="/">Home</RouterLink> -->
       <ClientOnly v-if="auth">
         <RouterLink to="/todo">Todos</RouterLink>
       </ClientOnly>
@@ -17,15 +16,6 @@
         </template>
       </ClientOnly>
     </div>
-    <!-- <ClientOnly>
-      <template v-if="auth">
-        <RouterLink to="/todo">Todos</RouterLink>
-        <RouterLink to="/logout">Logout</RouterLink>
-      </template>
-      <template v-else>
-        <RouterLink to="/login">Login or Register</RouterLink>
-      </template>
-    </ClientOnly> -->
   </nav>
 </template>
 

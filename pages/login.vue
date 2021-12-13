@@ -19,7 +19,6 @@
           <h1>Sign in</h1>
           <input type="email" placeholder="Email" v-model="username" />
           <input type="password" placeholder="Password" v-model="password" />
-          <!-- <a href="#">Forgot your password?</a> -->
           <RouterLink to="/forgot">Forgot your password?</RouterLink>
           <button>Sign In</button>
         </form>

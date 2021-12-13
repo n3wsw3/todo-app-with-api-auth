@@ -87,11 +87,6 @@ export default {
 };
 </script>
 
-<script lang="ts" setup>
-let counter = ref(0);
-const increase = () => counter.value++;
-</script>
-
 <style lang="less" scoped>
 @import "assets/definitions.less";
 .hero-text {
