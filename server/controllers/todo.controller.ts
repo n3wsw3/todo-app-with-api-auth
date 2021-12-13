@@ -3,14 +3,7 @@ import { Todo } from "../models/todo.model";
 import { useBody } from "h3";
 import { IncomingMessage, ServerResponse } from "http";
 import { useAuthenticatedUser } from "../utils/isAuthenticated";
-
-const Handler = <K = {}>(
-  handle: <T extends K>(
-    req: IncomingMessage,
-    res: ServerResponse,
-    params?: T
-  ) => any
-) => handle;
+import { Handler } from "../utils/Handler";
 
 export const createTodo = async (req: IncomingMessage, res: ServerResponse) => {
   const todo: TodoCreateRequest = await useBody(req);
