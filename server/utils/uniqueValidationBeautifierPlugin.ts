@@ -1,3 +1,7 @@
+/**
+ * Mongoose plugin which converts validation errors into a
+ * tree-like structure
+ */
 import mongoose from "mongoose";
 
 const errorRegex = /index: (.+) dup key:/;

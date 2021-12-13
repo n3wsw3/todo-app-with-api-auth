@@ -1,6 +1,12 @@
+/**
+ * Copy of h3 router with modifications to allow for path
+ * arguments and specify request methods.
+ *
+ * Using express doesn't currently work.
+ */
 import { createError, PHandle, send, MIMES } from "h3";
 import { IncomingMessage, ServerResponse } from "http";
-import { Match, match, MatchResult } from "./path-matcher";
+import { Match, match } from "./path-matcher";
 
 export type RouteInfo = {
   [key: string]: string;
