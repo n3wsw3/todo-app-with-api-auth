@@ -1,6 +1,6 @@
 <template>
   <nav class="main-wrapper">
-    <RouterLink to="/" class="logo">Todo App</RouterLink>
+    <RouterLink to="/" class="logo">TOpDOg</RouterLink>
     <div>
       <ClientOnly v-if="auth">
         <RouterLink to="/todo">Todos</RouterLink>

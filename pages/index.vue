@@ -5,7 +5,7 @@
         <div class="hero-text">
           <h1>The last todo app <span>you'll need.</span></h1>
           <p>
-            A website catered for your needs with the highest security and
+            A website catered to your needs with the highest security and
             professionalism in mind.
           </p>
         </div>
@@ -26,7 +26,8 @@
       <h1 class="center">We help you excel at your work</h1>
       <p class="smol center">
         We're not the solution you want, but the solution you need. The days of
-        the past will seem as a horror story after you've used the <b>best</b>.
+        the past will seem as a horror story after you've used the <b>best</b>,
+        TOpDOg.
       </p>
       <p class="smol center">
         Register for <b>free</b> at
@@ -37,12 +38,13 @@
       <div>
         <h1>Adapting your workflow</h1>
         <p>
-          Starting to use todos in your professional work can be a challenge
+          Using other todo apps can be a challenge when coupled with a moving
+          and professional workplace.
         </p>
         <p>
-          But, with our streamlined process even the most <b>stupid</b> or
-          <b>incompetent</b>
-          coworker can reach the stars.
+          But with TOpDOg's
+          <b>industry-leading</b> and <b>streamlined</b> process even a
+          <b>monkey</b>, looking at you dylan, can reach the stars.
         </p>
       </div>
       <div>
@@ -132,6 +134,7 @@ export default {
   > div {
     margin: 0.5em;
     padding: 1em;
+    flex: 1;
     > img {
       width: 100%;
       height: auto;
