@@ -39,7 +39,6 @@
     width: 100%;
     display: block;
     transform: scaleY(-1);
-    // filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 
     path {
       fill: .colors() [BG];
