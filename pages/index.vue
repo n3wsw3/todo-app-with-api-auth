@@ -49,7 +49,7 @@
           </p>
         </div>
         <div>
-          <img src="@/assets/adapting.png" alt="" />
+          <img src="@/assets/adapt.png" alt="" />
         </div>
       </div>
       <div class="spacing">
